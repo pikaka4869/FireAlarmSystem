@@ -26,7 +26,7 @@ const Register = () => {
 
   return (
     <div className="login-background">
-      <div className="login-container">
+      <div className="login-container" style={{ background: 'transparent' }}>
         <h1 className="login-title">注册</h1>
         <Form
           name="registerForm"

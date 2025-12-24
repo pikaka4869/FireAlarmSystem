@@ -91,7 +91,7 @@ const Register = () => {
           
           <Form.Item>
             <Form.Item name="agreement" valuePropName="checked" noStyle>
-              <Checkbox>我已阅读并同意 <a href="#" style={{ color: '#e50914' }}>服务条款</a></Checkbox>
+              <Checkbox style={{ color: '#ffffffff' }}>我已阅读并同意 <a href="#" style={{ color: '#0970efff' }}>服务条款</a></Checkbox>
             </Form.Item>
           </Form.Item>
           

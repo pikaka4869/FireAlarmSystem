@@ -26,7 +26,7 @@ const Login = () => {
 
   return (
     <div className="login-background">
-      <div className="login-container">
+      <div className="login-container" style={{ backgroundColor: "transparent" }}>
         <h1 className="login-title">登录</h1>
         <Form
           name="loginForm"
@@ -57,7 +57,7 @@ const Login = () => {
           <Form.Item>
             <div className="login-help">
               <Form.Item name="remember" valuePropName="checked" noStyle>
-                <Checkbox>记住我</Checkbox>
+                <Checkbox style={{ color: '#b3b3b3' }}>记住我</Checkbox>
               </Form.Item>
               <a href="#" style={{ color: '#b3b3b3' }}>忘记密码?</a>
             </div>

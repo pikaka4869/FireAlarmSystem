@@ -78,15 +78,14 @@ const CustomLayout = () => {
             padding: '0 24px'
           }}
         >
-          <div style={{ fontSize: '18px', fontWeight: 'bold', color: '#e50914' }}>
-            消防报警交互系统
-          </div>
+          <div></div>
           
           <Button 
             type="primary" 
             danger
             icon={<LogoutOutlined />}
             onClick={handleLogout}
+            style={{ height: '40px', marginTop: '5px' }}
           >
             退出登录
           </Button>

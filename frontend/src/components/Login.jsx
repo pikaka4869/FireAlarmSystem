@@ -39,7 +39,7 @@ const Login = () => {
 
   return (
     <div className="login-background">
-      <div className="login-container" style={{ backgroundColor: "transparent" }}>
+      <div className="login-container" style={{  }}>
         <h1 className="login-title">登录</h1>
         <Form
           name="loginForm"

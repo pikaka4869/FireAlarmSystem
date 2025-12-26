@@ -1,26 +1,43 @@
 import React from 'react';
 import { Outlet, Link, useNavigate } from 'react-router-dom';
-import { Layout, Menu, Button } from 'antd';
+import { Layout, Menu, Button, Avatar, Dropdown, message } from 'antd';
 import { 
   HomeOutlined, 
   UploadOutlined, 
   HistoryOutlined, 
   MessageOutlined, 
-  LogoutOutlined 
+  LogoutOutlined,
+  UserOutlined 
 } from '@ant-design/icons';
+import { useAuth } from '../context/AuthContext';
 
 const { Header, Sider, Content } = Layout;
 
 const CustomLayout = () => {
+  const { user, logout, isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
   // 处理退出登录
   const handleLogout = () => {
-    // 清除登录状态
-    localStorage.removeItem('token');
-    // 跳转到登录页
+    logout();
+    message.success('已退出登录');
     navigate('/login');
   };
+
+  const userMenuItems = [
+    {
+      key: 'profile',
+      icon: <UserOutlined />,
+      label: '个人中心',
+    },
+    {
+      key: 'logout',
+      icon: <LogoutOutlined />,
+      label: '退出登录',
+      danger: true,
+      onClick: handleLogout,
+    },
+  ];
 
   return (
     <Layout style={{ minHeight: '100vh', backgroundColor: '#000' }}>
@@ -80,15 +97,24 @@ const CustomLayout = () => {
         >
           <div></div>
           
-          <Button 
-            type="primary" 
-            danger
-            icon={<LogoutOutlined />}
-            onClick={handleLogout}
-            style={{ height: '40px', marginTop: '5px' }}
-          >
-            退出登录
-          </Button>
+          <Dropdown menu={{ items: userMenuItems }} placement="bottomRight">
+            <div style={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              cursor: 'pointer',
+              padding: '8px 16px',
+              borderRadius: '4px',
+              transition: 'background-color 0.3s'
+            }}>
+              <Avatar 
+                icon={<UserOutlined />} 
+                style={{ backgroundColor: '#e50914', marginRight: '8px' }}
+              />
+              <span style={{ color: '#fff', marginRight: '8px' }}>
+                {user?.username || '用户'}
+              </span>
+            </div>
+          </Dropdown>
         </Header>
         
         {/* 内容区域 */}

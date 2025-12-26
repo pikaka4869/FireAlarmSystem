@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, Checkbox, message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
+  const { login } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || '/dashboard';
 
   // 处理登录提交
   const handleLogin = async (values) => {
@@ -15,10 +20,18 @@ const Login = () => {
       console.log('登录信息:', values);
       // 模拟API请求延迟
       await new Promise(resolve => setTimeout(resolve, 1000));
-      // 登录成功后跳转到仪表盘
-      navigate('/dashboard');
+      
+      // 模拟登录成功
+      login({
+        username: values.username,
+        token: 'mock-jwt-token-' + Date.now(),
+      });
+      
+      message.success('登录成功');
+      navigate(from, { replace: true });
     } catch (error) {
       console.error('登录失败:', error);
+      message.error('登录失败，请重试');
     } finally {
       setLoading(false);
     }
